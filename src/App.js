@@ -2,7 +2,15 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header";
 import RegistrationForm from "./components/RegisterationForm";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./components/LoginForm";
+import NotFound from "./components/NotFound";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+
 function App() {
   return (
     <Router>
@@ -13,6 +21,11 @@ function App() {
             <Route path="/signup" exact={true}>
               <RegistrationForm />
             </Route>
+            <Route path="/login" exact={true}>
+              <Login />
+            </Route>
+            <Route path="/not-found" exact component={NotFound} />
+            <Redirect to="/not-found" />
           </Switch>
         </div>
       </div>

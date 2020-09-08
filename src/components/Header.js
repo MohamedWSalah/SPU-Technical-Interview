@@ -18,7 +18,7 @@ function Header() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item my-2">
-            <a className="btn btn-primary mx-2" href="/" role="button">
+            <a className="btn btn-primary mx-2" href="/login" role="button">
               Login
             </a>
           </li>

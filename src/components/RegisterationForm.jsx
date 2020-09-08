@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import UploadF from "./Upload";
+
 function RegistrationForm(props) {
   const [state, setState] = useState({
+    firstname: "",
+    lastname: "",
+    phonenumber: "",
     email: "",
     password: "",
     confirmPassword: "",
     successMessage: null,
+    errors: "",
   });
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
+    if (
+      !state.firstname ||
+      !state.lastname ||
+      !state.email ||
+      !state.password ||
+      !state.confirmPassword
+    )
+      return alert("Complete the Empty fields");
+
     if (state.password === state.confirmPassword) {
-      alert("Registered Successfuly");
+      alert("Registered successfully, But unfortunately there is no backend");
     } else {
       alert("Passwords do not match");
     }
@@ -27,7 +41,7 @@ function RegistrationForm(props) {
 
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-      <form>
+      <form onSubmit={handleSubmitClick} action="/login">
         <div className="form-group text-left">
           <label>First Name</label>
           <input
@@ -35,6 +49,7 @@ function RegistrationForm(props) {
             className="form-control"
             id="firstname"
             placeholder="First Name"
+            onChange={handleChange}
           />
         </div>
 
@@ -45,6 +60,7 @@ function RegistrationForm(props) {
             className="form-control"
             id="lastname"
             placeholder="Last Name"
+            onChange={handleChange}
           />
         </div>
 
@@ -63,8 +79,9 @@ function RegistrationForm(props) {
           <input
             type="text"
             className="form-control"
-            id="phone"
+            id="phonenumber"
             placeholder="Phone Number"
+            onChange={handleChange}
           />
         </div>
 
@@ -118,27 +135,24 @@ function RegistrationForm(props) {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmitClick}
-        >
+        <button type="submit" className="btn btn-primary">
           Register
         </button>
+
+        <div
+          className="alert alert-success mt-2"
+          style={{ display: state.successMessage ? "block" : "none" }}
+          role="alert"
+        >
+          {state.successMessage}
+        </div>
+        <div className="mt-2">
+          <span>Already have an account? </span>
+          <a className="loginText" href="/login">
+            Login here
+          </a>
+        </div>
       </form>
-      {/* <div
-        className="alert alert-success mt-2"
-        style={{ display: state.successMessage ? "block" : "none" }}
-        role="alert"
-      >
-        {state.successMessage}
-      </div>
-      <div className="mt-2">
-        <span>Already have an account? </span>
-        <span className="loginText">
-          Login here
-        </span>
-      </div> */}
     </div>
   );
 }
