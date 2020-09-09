@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 function NotFound() {
   return <h1 align="center">404 Not Found</h1>;

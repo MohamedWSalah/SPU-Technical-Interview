@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Upload } from "@progress/kendo-react-upload";
 
 class CustomListItemUI extends React.Component {

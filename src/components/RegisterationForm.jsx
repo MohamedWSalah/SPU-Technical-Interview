@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import UploadF from "./Upload";
+import { Route, BrowserRouter, withRouter } from "react-router-dom";
 
 function RegistrationForm(props) {
   const [state, setState] = useState({
-    firstname: "",
-    lastname: "",
+    firstname: "1",
+    lastname: "12",
     phonenumber: "",
     email: "",
     password: "",
@@ -13,8 +14,12 @@ function RegistrationForm(props) {
     errors: "",
   });
 
+  const redirectToLogin = () => {
+    console.log(props.history);
+    props.history.push("/login");
+  };
+
   const handleSubmitClick = (e) => {
-    e.preventDefault();
     if (
       !state.firstname ||
       !state.lastname ||
@@ -22,12 +27,13 @@ function RegistrationForm(props) {
       !state.password ||
       !state.confirmPassword
     )
-      return alert("Complete the Empty fields");
+      return alert("Complete the Empty fields"), e.preventDefault();
 
     if (state.password === state.confirmPassword) {
       alert("Registered successfully, But unfortunately there is no backend");
+      redirectToLogin();
     } else {
-      alert("Passwords do not match");
+      return alert("Passwords do not match"), e.preventDefault();
     }
   };
 
@@ -41,7 +47,7 @@ function RegistrationForm(props) {
 
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-      <form onSubmit={handleSubmitClick} action="/login">
+      <form onSubmit={handleSubmitClick}>
         <div className="form-group text-left">
           <label>First Name</label>
           <input
@@ -138,6 +144,7 @@ function RegistrationForm(props) {
         <button type="submit" className="btn btn-primary">
           Register
         </button>
+        <Route path="/login" />
 
         <div
           className="alert alert-success mt-2"
@@ -156,5 +163,12 @@ function RegistrationForm(props) {
     </div>
   );
 }
-
-export default RegistrationForm;
+const RegisterWithRouter = withRouter(RegistrationForm);
+const Register = () => {
+  return (
+    <BrowserRouter>
+      <RegisterWithRouter />
+    </BrowserRouter>
+  );
+};
+export default Register;

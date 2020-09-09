@@ -27,6 +27,12 @@ function Header() {
               SignUp
             </a>
           </li>
+
+          <li className="nav-item my-2">
+            <a className="btn btn-primary mx-2" href="/home" role="button">
+              Home
+            </a>
+          </li>
         </ul>
       </div>
       <img
